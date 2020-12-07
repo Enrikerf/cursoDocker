@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+    web:
+        build: ./cool_app
+        ports: 
+            - "127.0.0.1:8001:8001"
+        links: 
+            - postgres:postgres
+        command: python manage.py runserver 0.0.0.0:8001
+    postgres:
+        image: postgres:9.6
+        ports: 
+            -  "5432:5432"
+
+        env_file: .env
+        volumes: 
+            - ./pg_data/:/var/lib/postgresql/data/
+    
+
+
+
